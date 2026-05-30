@@ -17,7 +17,6 @@
 		39A7AF3D5C9315BB78D0FF95 /* DeveloperWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6180BC5DF73F58690C3DEC29 /* DeveloperWindow.swift */; };
 		3F38BC5855AF547B1A4CCB36 /* MenuPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B1395887730744B8D4E80F /* MenuPopoverView.swift */; };
 		4EF733105E597A0F284A64A1 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A58422A84421BA98969EB82A /* PrivacyInfo.xcprivacy */; };
-		60F6B7B639B02370BD4B425D /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 031FE02EFA682EA1C45490F9 /* Sparkle */; };
 		644B035307CC68F033FAFFF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C35D4E18670A2DF08DBE85 /* AppDelegate.swift */; };
 		6C5646D52CB81C52C7A59BE9 /* PoppyCore in Frameworks */ = {isa = PBXBuildFile; productRef = EBF63A2159D8D2C18A49B09C /* PoppyCore */; };
 		7416DB8D5B7CBAE0EA3917E2 /* ReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB9523B6F955F1422FD3E99 /* ReducerTests.swift */; };
@@ -80,7 +79,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F08DB04B95246791A926A248 /* PoppyCore in Frameworks */,
-				60F6B7B639B02370BD4B425D /* Sparkle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,7 +222,6 @@
 			name = Poppy;
 			packageProductDependencies = (
 				8460C9FE50AA8056AF0114CD /* PoppyCore */,
-				031FE02EFA682EA1C45490F9 /* Sparkle */,
 			);
 			productName = Poppy;
 			productReference = 034F85E657BD919F21FA79BE /* Poppy.app */;
@@ -275,7 +272,6 @@
 			mainGroup = AC5393A742B9C864E73558F7;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				ED5A9E8AF438AC4C6DC03441 /* XCRemoteSwiftPackageReference "Sparkle" */,
 				861AA8A1D3956AC7E3CBE38D /* XCLocalSwiftPackageReference "PoppyCore" */,
 			);
 			preferredProjectObjectVersion = 77;
@@ -624,23 +620,7 @@
 		};
 /* End XCLocalSwiftPackageReference section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		ED5A9E8AF438AC4C6DC03441 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sparkle-project/Sparkle";
-			requirement = {
-				kind = exactVersion;
-				version = 2.6.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		031FE02EFA682EA1C45490F9 /* Sparkle */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = ED5A9E8AF438AC4C6DC03441 /* XCRemoteSwiftPackageReference "Sparkle" */;
-			productName = Sparkle;
-		};
 		8460C9FE50AA8056AF0114CD /* PoppyCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PoppyCore;

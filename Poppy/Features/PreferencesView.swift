@@ -2,7 +2,6 @@ import AppKit
 import ComposableArchitecture
 import PoppyCore
 import ServiceManagement
-import Sparkle
 import SwiftUI
 
 // MARK: - General Settings
@@ -173,7 +172,7 @@ struct GeneralSettingsView: View {
                             Text("Updates")
                             Spacer()
                             Button("Check for Updates") {
-                                AppDelegate.updaterController.checkForUpdates(nil)
+                                PoppyUpdater.checkForUpdates()
                             }
                             .controlSize(.small)
                         }

@@ -2,15 +2,10 @@ import Cocoa
 import ComposableArchitecture
 import PoppyCore
 import ServiceManagement
-import Sparkle
 import SwiftUI
 
 @MainActor
 class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
-    static let updaterController = SPUStandardUpdaterController(
-        startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil
-    )
-
     static let appStore: Store<AppFeature.State, AppFeature.Action> = {
         ScreenshotClient.liveValue = ScreenshotClient(
             start: { ScreenshotWatcher.instance.start() },
@@ -36,6 +31,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         SBLog.app.info("Application did finish launching")
         DiagnosticsLogging.bootstrapIfNeeded()
+        PoppyUpdater.start()
 
         menuBarManager = MenuBarManager(store: Self.appStore)
         Self.appStore.send(.task)

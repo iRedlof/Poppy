@@ -9,9 +9,6 @@ options:
 packages:
   PoppyCore:
     path: PoppyCore
-  Sparkle:
-    url: https://github.com/sparkle-project/Sparkle
-    exactVersion: "2.6.0"
 
 targets:
   Poppy:
@@ -47,8 +44,6 @@ targets:
     dependencies:
       - package: PoppyCore
         product: PoppyCore
-      - package: Sparkle
-        product: Sparkle
     preBuildScripts:
       - name: SwiftLint
         basedOnDependencyAnalysis: false
