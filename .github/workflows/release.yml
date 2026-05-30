@@ -48,7 +48,10 @@ jobs:
         run: |
           set -o pipefail
           xcodebuild -project Poppy.xcodeproj -scheme Poppy \
-            -skipMacroValidation test \
+            -configuration Debug build \
+            -skipMacroValidation \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGN_IDENTITY="" \
             | tail -30
 
       - name: Test (PoppyCore)
