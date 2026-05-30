@@ -3,6 +3,7 @@ name: Release
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   check-version:
@@ -11,7 +12,7 @@ jobs:
       should_release: ${{ steps.check.outputs.should_release }}
       version: ${{ steps.check.outputs.version }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -20,24 +21,50 @@ jobs:
         run: |
           VERSION=$(grep 'MARKETING_VERSION' project.yml | head -1 | sed 's/.*"\(.*\)"/\1/')
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
           if git rev-parse "v$VERSION" >/dev/null 2>&1; then
             echo "should_release=false" >> "$GITHUB_OUTPUT"
-            echo "Tag v$VERSION already exists — skipping release"
+            echo "Tag v$VERSION already exists; skipping release"
           else
             echo "should_release=true" >> "$GITHUB_OUTPUT"
-            echo "New version $VERSION detected — will release"
+            echo "New version $VERSION detected; will release"
           fi
 
-  release:
-    needs: check-version
+  test:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install XcodeGen
+        run: command -v xcodegen || brew install xcodegen
+
+      - name: Generate Xcode project
+        run: xcodegen generate
+
+      - name: Resolve packages
+        run: xcodebuild -project Poppy.xcodeproj -scheme Poppy -resolvePackageDependencies -skipMacroValidation
+
+      - name: Test (App)
+        run: |
+          set -o pipefail
+          xcodebuild -project Poppy.xcodeproj -scheme Poppy \
+            -skipMacroValidation test \
+            | tail -30
+
+      - name: Test (PoppyCore)
+        run: cd PoppyCore && swift test
+
+  build:
+    needs: [check-version, test]
     if: needs.check-version.outputs.should_release == 'true'
-    runs-on: macos-15
+    runs-on: self-hosted
     permissions:
       contents: write
     env:
       VERSION: ${{ needs.check-version.outputs.version }}
+      DOWNLOAD_URL_PREFIX: https://github.com/iRedlof/Poppy/releases/download
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Install signing certificate
         env:
@@ -45,87 +72,164 @@ jobs:
           MACOS_CERTIFICATE_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
         run: |
           CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
-          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+          KEYCHAIN_PATH=$RUNNER_TEMP/poppy-signing.keychain-db
           KEYCHAIN_PWD=$(openssl rand -hex 16)
 
-          echo -n "$MACOS_CERTIFICATE" | base64 --decode -o $CERTIFICATE_PATH
+          security list-keychains -d user | tr -d '"' | tr '\n' ' ' > "$RUNNER_TEMP/original-keychains.txt"
 
-          security create-keychain -p "$KEYCHAIN_PWD" $KEYCHAIN_PATH
-          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
-          security unlock-keychain -p "$KEYCHAIN_PWD" $KEYCHAIN_PATH
+          curl -sL "https://www.apple.com/appleca/AppleIncRootCertificate.cer" -o "$RUNNER_TEMP/AppleRoot.cer"
+          curl -sL "https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer" -o "$RUNNER_TEMP/AppleWWDRCAG3.cer"
+          curl -sL "https://www.apple.com/certificateauthority/DeveloperIDG2CA.cer" -o "$RUNNER_TEMP/DeveloperIDG2CA.cer"
 
-          security import $CERTIFICATE_PATH -P "$MACOS_CERTIFICATE_PWD" \
-            -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          echo -n "$MACOS_CERTIFICATE" | base64 --decode -o "$CERTIFICATE_PATH"
+
+          security create-keychain -p "$KEYCHAIN_PWD" "$KEYCHAIN_PATH"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
+          security unlock-keychain -p "$KEYCHAIN_PWD" "$KEYCHAIN_PATH"
+
+          security import "$RUNNER_TEMP/AppleRoot.cer" -k "$KEYCHAIN_PATH" -T /usr/bin/codesign
+          security import "$RUNNER_TEMP/AppleWWDRCAG3.cer" -k "$KEYCHAIN_PATH" -T /usr/bin/codesign
+          security import "$RUNNER_TEMP/DeveloperIDG2CA.cer" -k "$KEYCHAIN_PATH" -T /usr/bin/codesign
+
+          security import "$CERTIFICATE_PATH" -P "$MACOS_CERTIFICATE_PWD" \
+            -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH"
           security set-key-partition-list -S apple-tool:,apple: \
-            -k "$KEYCHAIN_PWD" $KEYCHAIN_PATH
+            -k "$KEYCHAIN_PWD" "$KEYCHAIN_PATH"
 
-          security list-keychains -d user -s $KEYCHAIN_PATH
+          security list-keychains -d user -s "$KEYCHAIN_PATH" ~/Library/Keychains/login.keychain-db /Library/Keychains/System.keychain /System/Library/Keychains/SystemRootCertificates.keychain
+          security find-identity -v -p codesigning "$KEYCHAIN_PATH" || true
 
-          rm -f $CERTIFICATE_PATH
+          rm -f "$CERTIFICATE_PATH" "$RUNNER_TEMP/AppleRoot.cer" "$RUNNER_TEMP/AppleWWDRCAG3.cer" "$RUNNER_TEMP/DeveloperIDG2CA.cer"
 
-      - name: Install xcodegen
-        run: brew install xcodegen
+      - name: Install tools
+        run: |
+          command -v xcodegen || brew install xcodegen
+          command -v create-dmg || brew install create-dmg
 
       - name: Generate Xcode project
         run: xcodegen generate
 
-      - name: Clean SPM cache
-        run: rm -rf ~/Library/Caches/org.swift.swiftpm
+      - name: Resolve SPM dependencies
+        run: xcodebuild -project Poppy.xcodeproj -scheme Poppy -resolvePackageDependencies -skipMacroValidation
 
-      - name: Build Release archive
+      - name: Archive
         run: |
-          xcodebuild -project CmdEx.xcodeproj -scheme CmdEx \
-            -configuration Release archive \
-            -archivePath ./build/CmdEx.xcarchive \
-            -skipMacroValidation
+          mkdir -p ./build
+          xcodebuild -project Poppy.xcodeproj -scheme Poppy -configuration Release \
+            -destination 'platform=macOS' \
+            -archivePath ./build/archive.xcarchive \
+            -skipMacroValidation \
+            ARCHS=arm64 \
+            DEVELOPMENT_TEAM=${{ secrets.TEAM_ID }} archive
 
-      - name: Package and sign
+      - name: Export
+        run: |
+          /usr/libexec/PlistBuddy -c "Add :method string developer-id" ./build/ExportOptions.plist
+          /usr/libexec/PlistBuddy -c "Add :signingStyle string automatic" ./build/ExportOptions.plist
+          /usr/libexec/PlistBuddy -c "Add :teamID string ${{ secrets.TEAM_ID }}" ./build/ExportOptions.plist
+          xcodebuild -exportArchive \
+            -archivePath ./build/archive.xcarchive \
+            -exportPath ./build/export \
+            -exportOptionsPlist ./build/ExportOptions.plist
+          test -d "./build/export/Poppy.app" || { echo "Export failed"; exit 1; }
+
+      - name: Notarize app
+        env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+          TEAM_ID: ${{ secrets.TEAM_ID }}
+        run: |
+          codesign -dvv ./build/export/Poppy.app 2>&1 | grep -E "Authority|Runtime"
+
+          ditto -c -k --keepParent ./build/export/Poppy.app ./build/Poppy-notarize.zip
+          xcrun notarytool submit ./build/Poppy-notarize.zip \
+            --apple-id "$APPLE_ID" --password "$APPLE_ID_PASSWORD" --team-id "$TEAM_ID" --wait
+          for i in 1 2 3; do
+            if xcrun stapler staple ./build/export/Poppy.app; then break; fi
+            echo "Staple attempt $i failed, waiting 15s..."
+            sleep 15
+          done
+          xcrun stapler validate ./build/export/Poppy.app || { echo "App staple failed after 3 attempts"; exit 1; }
+          rm -f ./build/Poppy-notarize.zip
+
+      - name: Create and notarize DMG
+        env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+          TEAM_ID: ${{ secrets.TEAM_ID }}
+        run: |
+          mkdir -p ./build/dmg_staging
+          cp -R ./build/export/Poppy.app ./build/dmg_staging/
+
+          DMG_ARGS=(
+            --volname "Poppy"
+            --window-pos 200 120 --window-size 600 400
+            --icon-size 100 --icon "Poppy.app" 150 190
+            --app-drop-link 450 190 --hide-extension "Poppy.app"
+            --no-internet-enable
+          )
+
+          if [ -f "./tools/resources/AppIcon.icns" ]; then
+            DMG_ARGS+=(--volicon "./tools/resources/AppIcon.icns")
+          fi
+
+          create-dmg "${DMG_ARGS[@]}" "./build/Poppy-${VERSION}.dmg" "./build/dmg_staging"
+
+          if [ -f "./tools/resources/AppIcon.icns" ]; then
+            ICON_RSRC=$(mktemp)
+            sips -i ./tools/resources/AppIcon.icns >/dev/null 2>&1
+            DeRez -only icns ./tools/resources/AppIcon.icns > "$ICON_RSRC" 2>/dev/null
+            Rez -append "$ICON_RSRC" -o "./build/Poppy-${VERSION}.dmg" 2>/dev/null
+            SetFile -a C "./build/Poppy-${VERSION}.dmg" 2>/dev/null
+            rm -f "$ICON_RSRC"
+          fi
+
+          xcrun notarytool submit "./build/Poppy-${VERSION}.dmg" \
+            --apple-id "$APPLE_ID" --password "$APPLE_ID_PASSWORD" --team-id "$TEAM_ID" --wait
+          for i in 1 2 3; do
+            if xcrun stapler staple "./build/Poppy-${VERSION}.dmg"; then break; fi
+            echo "Staple attempt $i failed, waiting 15s..."
+            sleep 15
+          done
+          xcrun stapler validate "./build/Poppy-${VERSION}.dmg" || { echo "DMG staple failed after 3 attempts"; exit 1; }
+
+      - name: Sign with Sparkle and generate appcast
         env:
           SPARKLE_KEY: ${{ secrets.SPARKLE_PRIVATE_KEY }}
         run: |
-          cp -R ./build/CmdEx.xcarchive/Products/Applications/CmdEx.app ./build/CmdEx.app
-          ditto -c -k --keepParent ./build/CmdEx.app "./build/CmdEx-${VERSION}.zip"
-
-          SPARKLE_BIN=$(find ~/Library/Developer/Xcode/DerivedData/CmdEx-*/SourcePackages/artifacts/sparkle/Sparkle/bin -maxdepth 0 | head -1)
-          echo "$SPARKLE_KEY" > /tmp/sparkle_key
-          SIGN_OUTPUT=$("$SPARKLE_BIN/sign_update" "./build/CmdEx-${VERSION}.zip" --ed-key-file /tmp/sparkle_key)
-          rm -f /tmp/sparkle_key
-
-          ED_SIGNATURE=$(echo "$SIGN_OUTPUT" | grep -o 'edSignature="[^"]*"' | cut -d'"' -f2)
-          LENGTH=$(echo "$SIGN_OUTPUT" | grep -o 'length="[^"]*"' | cut -d'"' -f2)
-
-          cat > ./build/appcast.xml << EOF
-          <?xml version="1.0" encoding="utf-8"?>
-          <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
-            <channel>
-              <title>CmdEx</title>
-              <item>
-                <title>Version ${VERSION}</title>
-                <sparkle:version>$(grep 'CURRENT_PROJECT_VERSION' project.yml | head -1 | sed 's/.*"\(.*\)"/\1/')</sparkle:version>
-                <sparkle:shortVersionString>${VERSION}</sparkle:shortVersionString>
-                <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
-                <enclosure
-                  url="https://github.com/rlchandani/CmdEx/releases/download/v${VERSION}/CmdEx-${VERSION}.zip"
-                  length="${LENGTH}"
-                  type="application/octet-stream"
-                  sparkle:edSignature="${ED_SIGNATURE}"
-                />
-              </item>
-            </channel>
-          </rss>
-          EOF
-
-      - name: Clean up keychain
-        if: always()
-        run: |
-          security delete-keychain $RUNNER_TEMP/app-signing.keychain-db 2>/dev/null || true
+          SPARKLE_BIN=$(find ~/Library/Developer/Xcode/DerivedData -type d -path "*/SourcePackages/artifacts/sparkle/Sparkle/bin" 2>/dev/null | head -1)
+          test -x "$SPARKLE_BIN/sign_update" || { echo "Sparkle sign_update not found"; exit 1; }
+          test -x "$SPARKLE_BIN/generate_appcast" || { echo "Sparkle generate_appcast not found"; exit 1; }
+          KEY_FILE=$(mktemp)
+          chmod 600 "$KEY_FILE"
+          printf '%s' "$SPARKLE_KEY" > "$KEY_FILE"
+          "$SPARKLE_BIN/sign_update" "./build/Poppy-${VERSION}.dmg" --ed-key-file "$KEY_FILE"
+          mkdir -p ./build/appcast_source
+          cp "./build/Poppy-${VERSION}.dmg" ./build/appcast_source/
+          "$SPARKLE_BIN/generate_appcast" --ed-key-file "$KEY_FILE" \
+            --download-url-prefix "$DOWNLOAD_URL_PREFIX/v${VERSION}/" \
+            ./build/appcast_source
+          rm -f "$KEY_FILE"
 
       - name: Create GitHub Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          ASSETS=("./build/Poppy-${VERSION}.dmg")
+          if [ -f ./build/appcast_source/appcast.xml ]; then
+            ASSETS+=("./build/appcast_source/appcast.xml")
+          fi
           gh release create "v${VERSION}" \
-            "./build/CmdEx-${VERSION}.zip" \
-            ./build/appcast.xml \
+            "${ASSETS[@]}" \
             --title "v${VERSION}" \
             --generate-notes
+
+      - name: Clean up
+        if: always()
+        run: |
+          security delete-keychain "$RUNNER_TEMP/poppy-signing.keychain-db" 2>/dev/null || true
+          if [ -f "$RUNNER_TEMP/original-keychains.txt" ]; then
+            xargs security list-keychains -d user -s < "$RUNNER_TEMP/original-keychains.txt"
+          else
+            security list-keychains -d user -s ~/Library/Keychains/login.keychain-db /Library/Keychains/System.keychain
+          fi

@@ -2,19 +2,21 @@
 import PackageDescription
 
 let package = Package(
-    name: "CmdEx",
+    name: "Poppy",
     platforms: [.macOS(.v15)],
     dependencies: [
-        .package(path: "CmdExCore"),
+        .package(path: "PoppyCore"),
+        .package(url: "https://github.com/sparkle-project/Sparkle", exact: "2.6.0"),
     ],
     targets: [
         .executableTarget(
-            name: "CmdEx",
+            name: "Poppy",
             dependencies: [
-                .product(name: "CmdExCore", package: "CmdExCore"),
+                .product(name: "PoppyCore", package: "PoppyCore"),
+                .product(name: "Sparkle", package: "Sparkle"),
             ],
-            path: "CmdEx",
-            exclude: ["Info.plist", "CmdEx.entitlements"]
+            path: "Poppy",
+            exclude: ["Info.plist", "Poppy.entitlements", "Assets.xcassets", "Localizable.xcstrings"]
         ),
     ]
 )

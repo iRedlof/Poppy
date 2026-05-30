@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleIconName</key>
+    <string>AppIcon</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>LSUIElement</key>
+    <true/>
+    <key>CFBundleName</key>
+    <string>Poppy</string>
+    <key>CFBundleDisplayName</key>
+    <string>Poppy</string>
+    <key>CFBundleExecutable</key>
+    <string>$(EXECUTABLE_NAME)</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.iredlof.poppy</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleVersion</key>
+    <string>$(CURRENT_PROJECT_VERSION)</string>
+    <key>CFBundleShortVersionString</key>
+    <string>$(MARKETING_VERSION)</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>15.0</string>
+    <key>NSAppleEventsUsageDescription</key>
+    <string>Poppy needs to send commands to terminal applications.</string>
+    <key>SUFeedURL</key>
+    <string>https://github.com/iRedlof/Poppy/releases/latest/download/appcast.xml</string>
+    <key>SUPublicEDKey</key>
+    <string>oXVaTrKGxjkAnZXGkwVABWNWiNvZg9SR1B2zlnkiJU8=</string>
+    <key>NSUserNotificationAlertStyle</key>
+    <string>banner</string>
+</dict>
+</plist>

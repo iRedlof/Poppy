@@ -1,0 +1,655 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0B07D002C357A60837DF6EC7 /* ShortcutEditSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF09DA53868A8AAF7C065144 /* ShortcutEditSheet.swift */; };
+		0CD97149F137DC2311C134CE /* MainWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55D2DC77024358A7C700156 /* MainWindowView.swift */; };
+		1AD29C9C931A7D256AC5629D /* ToastWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1613156B69420B54463477C /* ToastWindow.swift */; };
+		1DEA798AFCE53E747E4213EF /* TimeZoneSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DDAF12CB2F3C616A788F77 /* TimeZoneSettingsView.swift */; };
+		26446B7F42C8B136939F6F55 /* DataManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886133D37D1FDDE49F03D095 /* DataManagementView.swift */; };
+		2A090BEA58933079EC2E4E9C /* sample_store.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BEF0D10AD866EE56E4919BC /* sample_store.json */; };
+		38B4D5CAAE8B69012B1368EB /* DiagnosticsLogging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988FE67D52CC15891765F83C /* DiagnosticsLogging.swift */; };
+		39A7AF3D5C9315BB78D0FF95 /* DeveloperWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6180BC5DF73F58690C3DEC29 /* DeveloperWindow.swift */; };
+		3F38BC5855AF547B1A4CCB36 /* MenuPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B1395887730744B8D4E80F /* MenuPopoverView.swift */; };
+		4EF733105E597A0F284A64A1 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A58422A84421BA98969EB82A /* PrivacyInfo.xcprivacy */; };
+		60F6B7B639B02370BD4B425D /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 031FE02EFA682EA1C45490F9 /* Sparkle */; };
+		644B035307CC68F033FAFFF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C35D4E18670A2DF08DBE85 /* AppDelegate.swift */; };
+		6C5646D52CB81C52C7A59BE9 /* PoppyCore in Frameworks */ = {isa = PBXBuildFile; productRef = EBF63A2159D8D2C18A49B09C /* PoppyCore */; };
+		7416DB8D5B7CBAE0EA3917E2 /* ReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB9523B6F955F1422FD3E99 /* ReducerTests.swift */; };
+		7A44E6CA39D383AF3C42A44E /* HoverButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD92D5F9AA5657017B18013D /* HoverButton.swift */; };
+		9330AD34CC7F746EFF86A956 /* MenuBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA116ED3FC95C866E075964B /* MenuBarManager.swift */; };
+		9331568A8492111DE1F53DE5 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A920650ABA13EB9B58F47A60 /* DashboardView.swift */; };
+		B2CAB352D08D4F3FD61AABD4 /* ShortcutsFeatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D169CC2E08B520DE5F4294 /* ShortcutsFeatureTests.swift */; };
+		BFFC6053A87689057C9C0257 /* TimeConverterPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3096BC43E0540711DF6BDEDF /* TimeConverterPanel.swift */; };
+		C60E40F6723FB822480BDBE3 /* PopoverManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F833082CB1826E132AB2A0C /* PopoverManager.swift */; };
+		C682801A23D5C3ED9D72E817 /* ScreenshotWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A363DC5005EF7D4BC0F6BEDA /* ScreenshotWatcher.swift */; };
+		D3BEAD8E5B1A78AB6F0ED2A6 /* SettingsHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFD9CE5CBD33D60983BAFD8 /* SettingsHelpers.swift */; };
+		D952BFC9FDB04A52CBB3AE57 /* PoppyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4874D63357468384CD757B /* PoppyApp.swift */; };
+		EBBAF9905D3C2E17985BB410 /* AppFeatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F7A3E50DFC42982B21DA66 /* AppFeatureTests.swift */; };
+		EDAF01C42DAE3960DA30111B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 235561BF795D10ABE02F24B5 /* Assets.xcassets */; };
+		F08DB04B95246791A926A248 /* PoppyCore in Frameworks */ = {isa = PBXBuildFile; productRef = 8460C9FE50AA8056AF0114CD /* PoppyCore */; };
+		F200748D4E134CFF32232D9F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F950AC891F6FEB5D0197259D /* Localizable.xcstrings */; };
+		F23BEE40A0042415F89818BF /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7281DBB4B19BFDE79C73A16 /* PreferencesView.swift */; };
+		FC7E7DA323E68C94B489C578 /* GroupEditSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B803D91C758ECD7FEAB4745F /* GroupEditSheet.swift */; };
+		FD24F21D8B9B30D443F94788 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387AF90C2AE5FECBA2A40B07 /* ModelTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		034F85E657BD919F21FA79BE /* Poppy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Poppy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		235561BF795D10ABE02F24B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2BEF0D10AD866EE56E4919BC /* sample_store.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = sample_store.json; sourceTree = "<group>"; };
+		3096BC43E0540711DF6BDEDF /* TimeConverterPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeConverterPanel.swift; sourceTree = "<group>"; };
+		387AF90C2AE5FECBA2A40B07 /* ModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
+		39D169CC2E08B520DE5F4294 /* ShortcutsFeatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsFeatureTests.swift; sourceTree = "<group>"; };
+		3C4874D63357468384CD757B /* PoppyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoppyApp.swift; sourceTree = "<group>"; };
+		4F833082CB1826E132AB2A0C /* PopoverManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverManager.swift; sourceTree = "<group>"; };
+		4FB9523B6F955F1422FD3E99 /* ReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReducerTests.swift; sourceTree = "<group>"; };
+		6180BC5DF73F58690C3DEC29 /* DeveloperWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperWindow.swift; sourceTree = "<group>"; };
+		79F7A3E50DFC42982B21DA66 /* AppFeatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeatureTests.swift; sourceTree = "<group>"; };
+		886133D37D1FDDE49F03D095 /* DataManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagementView.swift; sourceTree = "<group>"; };
+		88B1395887730744B8D4E80F /* MenuPopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPopoverView.swift; sourceTree = "<group>"; };
+		89C35D4E18670A2DF08DBE85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		988FE67D52CC15891765F83C /* DiagnosticsLogging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosticsLogging.swift; sourceTree = "<group>"; };
+		9CE71EF4A92154542D6220DE /* PoppyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PoppyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A363DC5005EF7D4BC0F6BEDA /* ScreenshotWatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotWatcher.swift; sourceTree = "<group>"; };
+		A58422A84421BA98969EB82A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		A920650ABA13EB9B58F47A60 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		B177C436D3E1F84B86B68F3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B2DDAF12CB2F3C616A788F77 /* TimeZoneSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneSettingsView.swift; sourceTree = "<group>"; };
+		B803D91C758ECD7FEAB4745F /* GroupEditSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupEditSheet.swift; sourceTree = "<group>"; };
+		CBFD9CE5CBD33D60983BAFD8 /* SettingsHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHelpers.swift; sourceTree = "<group>"; };
+		D4BA583809CD73A8F397B5CF /* Poppy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Poppy.entitlements; sourceTree = "<group>"; };
+		D55D2DC77024358A7C700156 /* MainWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowView.swift; sourceTree = "<group>"; };
+		D7281DBB4B19BFDE79C73A16 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
+		EA116ED3FC95C866E075964B /* MenuBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarManager.swift; sourceTree = "<group>"; };
+		EF09DA53868A8AAF7C065144 /* ShortcutEditSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutEditSheet.swift; sourceTree = "<group>"; };
+		F1613156B69420B54463477C /* ToastWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastWindow.swift; sourceTree = "<group>"; };
+		F62E18DF0FAB7DA39C13121C /* PoppyCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PoppyCore; path = PoppyCore; sourceTree = SOURCE_ROOT; };
+		F950AC891F6FEB5D0197259D /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		FD92D5F9AA5657017B18013D /* HoverButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoverButton.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2B638CF9F5FFCC3E7A86EC15 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F08DB04B95246791A926A248 /* PoppyCore in Frameworks */,
+				60F6B7B639B02370BD4B425D /* Sparkle in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4F2631695E79352A18A0135 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C5646D52CB81C52C7A59BE9 /* PoppyCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		26520C26B2D320F94617AD81 /* PoppyCoreTests */ = {
+			isa = PBXGroup;
+			children = (
+				79F7A3E50DFC42982B21DA66 /* AppFeatureTests.swift */,
+				387AF90C2AE5FECBA2A40B07 /* ModelTests.swift */,
+				4FB9523B6F955F1422FD3E99 /* ReducerTests.swift */,
+				39D169CC2E08B520DE5F4294 /* ShortcutsFeatureTests.swift */,
+				C097456143F32467C73B51D2 /* Fixtures */,
+			);
+			path = PoppyCoreTests;
+			sourceTree = "<group>";
+		};
+		3C50AECEEB01ED2DE598DD5F /* Poppy */ = {
+			isa = PBXGroup;
+			children = (
+				235561BF795D10ABE02F24B5 /* Assets.xcassets */,
+				B177C436D3E1F84B86B68F3D /* Info.plist */,
+				F950AC891F6FEB5D0197259D /* Localizable.xcstrings */,
+				D4BA583809CD73A8F397B5CF /* Poppy.entitlements */,
+				A58422A84421BA98969EB82A /* PrivacyInfo.xcprivacy */,
+				67FA149F244C1E7F6A923315 /* App */,
+				AD596C7914447D24C5E20DED /* Features */,
+			);
+			path = Poppy;
+			sourceTree = "<group>";
+		};
+		67FA149F244C1E7F6A923315 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				89C35D4E18670A2DF08DBE85 /* AppDelegate.swift */,
+				988FE67D52CC15891765F83C /* DiagnosticsLogging.swift */,
+				FD92D5F9AA5657017B18013D /* HoverButton.swift */,
+				EA116ED3FC95C866E075964B /* MenuBarManager.swift */,
+				88B1395887730744B8D4E80F /* MenuPopoverView.swift */,
+				4F833082CB1826E132AB2A0C /* PopoverManager.swift */,
+				3C4874D63357468384CD757B /* PoppyApp.swift */,
+				A363DC5005EF7D4BC0F6BEDA /* ScreenshotWatcher.swift */,
+				CBFD9CE5CBD33D60983BAFD8 /* SettingsHelpers.swift */,
+				F1613156B69420B54463477C /* ToastWindow.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		91FEED897E5005BACD14F82A /* PoppyCore */ = {
+			isa = PBXGroup;
+			children = (
+				A5C85E683979BA078F9E17B7 /* Tests */,
+			);
+			path = PoppyCore;
+			sourceTree = "<group>";
+		};
+		A49819577377D08BE0E9EBD4 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				F62E18DF0FAB7DA39C13121C /* PoppyCore */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		A5C85E683979BA078F9E17B7 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				26520C26B2D320F94617AD81 /* PoppyCoreTests */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		AC5393A742B9C864E73558F7 = {
+			isa = PBXGroup;
+			children = (
+				A49819577377D08BE0E9EBD4 /* Packages */,
+				3C50AECEEB01ED2DE598DD5F /* Poppy */,
+				91FEED897E5005BACD14F82A /* PoppyCore */,
+				B10D41C961B59DDADA4A2286 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AD596C7914447D24C5E20DED /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				A920650ABA13EB9B58F47A60 /* DashboardView.swift */,
+				886133D37D1FDDE49F03D095 /* DataManagementView.swift */,
+				6180BC5DF73F58690C3DEC29 /* DeveloperWindow.swift */,
+				B803D91C758ECD7FEAB4745F /* GroupEditSheet.swift */,
+				D55D2DC77024358A7C700156 /* MainWindowView.swift */,
+				D7281DBB4B19BFDE79C73A16 /* PreferencesView.swift */,
+				EF09DA53868A8AAF7C065144 /* ShortcutEditSheet.swift */,
+				3096BC43E0540711DF6BDEDF /* TimeConverterPanel.swift */,
+				B2DDAF12CB2F3C616A788F77 /* TimeZoneSettingsView.swift */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		B10D41C961B59DDADA4A2286 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				034F85E657BD919F21FA79BE /* Poppy.app */,
+				9CE71EF4A92154542D6220DE /* PoppyTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C097456143F32467C73B51D2 /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				2BEF0D10AD866EE56E4919BC /* sample_store.json */,
+			);
+			path = Fixtures;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5D55C67CC48DA522153CA2E3 /* Poppy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B9358F478445E7CE8F9A650F /* Build configuration list for PBXNativeTarget "Poppy" */;
+			buildPhases = (
+				8B49D20D111954254E032EE0 /* SwiftLint */,
+				55FCB80A79BC293708355C69 /* Sources */,
+				3674D1DD38B630D643CCAEBD /* Resources */,
+				2B638CF9F5FFCC3E7A86EC15 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Poppy;
+			packageProductDependencies = (
+				8460C9FE50AA8056AF0114CD /* PoppyCore */,
+				031FE02EFA682EA1C45490F9 /* Sparkle */,
+			);
+			productName = Poppy;
+			productReference = 034F85E657BD919F21FA79BE /* Poppy.app */;
+			productType = "com.apple.product-type.application";
+		};
+		864F7F826627D3663D653BDF /* PoppyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FFAFC10795F4AB13371E1C62 /* Build configuration list for PBXNativeTarget "PoppyTests" */;
+			buildPhases = (
+				703733AFB37CF4817AE3C063 /* Sources */,
+				2B5C97B1EA10C7D8595CB43A /* Resources */,
+				D4F2631695E79352A18A0135 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PoppyTests;
+			packageProductDependencies = (
+				EBF63A2159D8D2C18A49B09C /* PoppyCore */,
+			);
+			productName = PoppyTests;
+			productReference = 9CE71EF4A92154542D6220DE /* PoppyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2031A34B9287F5F1D584118C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					5D55C67CC48DA522153CA2E3 = {
+						DevelopmentTeam = 5D7M37QQLU;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 76F4B421F62EE08FA3147551 /* Build configuration list for PBXProject "Poppy" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = AC5393A742B9C864E73558F7;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				ED5A9E8AF438AC4C6DC03441 /* XCRemoteSwiftPackageReference "Sparkle" */,
+				861AA8A1D3956AC7E3CBE38D /* XCLocalSwiftPackageReference "PoppyCore" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = B10D41C961B59DDADA4A2286 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5D55C67CC48DA522153CA2E3 /* Poppy */,
+				864F7F826627D3663D653BDF /* PoppyTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2B5C97B1EA10C7D8595CB43A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A090BEA58933079EC2E4E9C /* sample_store.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3674D1DD38B630D643CCAEBD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDAF01C42DAE3960DA30111B /* Assets.xcassets in Resources */,
+				F200748D4E134CFF32232D9F /* Localizable.xcstrings in Resources */,
+				4EF733105E597A0F284A64A1 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8B49D20D111954254E032EE0 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if command -v swiftlint >/dev/null 2>&1; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		55FCB80A79BC293708355C69 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				644B035307CC68F033FAFFF1 /* AppDelegate.swift in Sources */,
+				9331568A8492111DE1F53DE5 /* DashboardView.swift in Sources */,
+				26446B7F42C8B136939F6F55 /* DataManagementView.swift in Sources */,
+				39A7AF3D5C9315BB78D0FF95 /* DeveloperWindow.swift in Sources */,
+				38B4D5CAAE8B69012B1368EB /* DiagnosticsLogging.swift in Sources */,
+				FC7E7DA323E68C94B489C578 /* GroupEditSheet.swift in Sources */,
+				7A44E6CA39D383AF3C42A44E /* HoverButton.swift in Sources */,
+				0CD97149F137DC2311C134CE /* MainWindowView.swift in Sources */,
+				9330AD34CC7F746EFF86A956 /* MenuBarManager.swift in Sources */,
+				3F38BC5855AF547B1A4CCB36 /* MenuPopoverView.swift in Sources */,
+				C60E40F6723FB822480BDBE3 /* PopoverManager.swift in Sources */,
+				D952BFC9FDB04A52CBB3AE57 /* PoppyApp.swift in Sources */,
+				F23BEE40A0042415F89818BF /* PreferencesView.swift in Sources */,
+				C682801A23D5C3ED9D72E817 /* ScreenshotWatcher.swift in Sources */,
+				D3BEAD8E5B1A78AB6F0ED2A6 /* SettingsHelpers.swift in Sources */,
+				0B07D002C357A60837DF6EC7 /* ShortcutEditSheet.swift in Sources */,
+				BFFC6053A87689057C9C0257 /* TimeConverterPanel.swift in Sources */,
+				1DEA798AFCE53E747E4213EF /* TimeZoneSettingsView.swift in Sources */,
+				1AD29C9C931A7D256AC5629D /* ToastWindow.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		703733AFB37CF4817AE3C063 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EBBAF9905D3C2E17985BB410 /* AppFeatureTests.swift in Sources */,
+				FD24F21D8B9B30D443F94788 /* ModelTests.swift in Sources */,
+				7416DB8D5B7CBAE0EA3917E2 /* ReducerTests.swift in Sources */,
+				B2CAB352D08D4F3FD61AABD4 /* ShortcutsFeatureTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2842E2E7AE6DC3B0B1A76E22 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Poppy/Poppy.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 7;
+				DEVELOPMENT_TEAM = 5D7M37QQLU;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Poppy/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.6.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iredlof.poppy;
+				PRODUCT_NAME = Poppy;
+				SDKROOT = macosx;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		6FA67CFE6D34F0B5084EEC91 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		821CDC353F66B1771894FFD5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.iredlof.PoppyTests;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
+				TEST_HOST = "";
+			};
+			name = Release;
+		};
+		A0900AAB1EC08A19A7A2E9A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Poppy/Poppy.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 7;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 5D7M37QQLU;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Poppy/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.6.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iredlof.poppy;
+				PRODUCT_NAME = Poppy;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D40628382481A2BBA616D646 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		EC5140B2C1F56471E0716064 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.iredlof.PoppyTests;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
+				TEST_HOST = "";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		76F4B421F62EE08FA3147551 /* Build configuration list for PBXProject "Poppy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D40628382481A2BBA616D646 /* Debug */,
+				6FA67CFE6D34F0B5084EEC91 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B9358F478445E7CE8F9A650F /* Build configuration list for PBXNativeTarget "Poppy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2842E2E7AE6DC3B0B1A76E22 /* Debug */,
+				A0900AAB1EC08A19A7A2E9A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		FFAFC10795F4AB13371E1C62 /* Build configuration list for PBXNativeTarget "PoppyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC5140B2C1F56471E0716064 /* Debug */,
+				821CDC353F66B1771894FFD5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		861AA8A1D3956AC7E3CBE38D /* XCLocalSwiftPackageReference "PoppyCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = PoppyCore;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		ED5A9E8AF438AC4C6DC03441 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = exactVersion;
+				version = 2.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		031FE02EFA682EA1C45490F9 /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED5A9E8AF438AC4C6DC03441 /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
+		8460C9FE50AA8056AF0114CD /* PoppyCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PoppyCore;
+		};
+		EBF63A2159D8D2C18A49B09C /* PoppyCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PoppyCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 2031A34B9287F5F1D584118C /* Project object */;
+}

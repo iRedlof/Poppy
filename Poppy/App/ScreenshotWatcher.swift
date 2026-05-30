@@ -1,0 +1,113 @@
+import AppKit
+import ComposableArchitecture
+import Foundation
+import PoppyCore
+
+@MainActor
+final class ScreenshotWatcher {
+    static let instance = ScreenshotWatcher()
+
+    private var stream: FSEventStreamRef?
+    private var isRunning = false
+    private var lastKnownFiles: Set<String> = []
+
+    var enabled: Bool {
+        get {
+            @Shared(.appSettings) var settings
+            return settings.screenshotWatcherEnabled
+        }
+        set {
+            @Shared(.appSettings) var settings
+            $settings.withLock { $0.screenshotWatcherEnabled = newValue }
+            if newValue { start() } else { stop() }
+        }
+    }
+
+    var watchPath: String {
+        // Reading macOS system screenshot preference — not app state
+        if let domain = UserDefaults(suiteName: "com.apple.screencapture"),
+           let location = domain.string(forKey: "location") {
+            return (location as NSString).expandingTildeInPath
+        }
+        return (NSHomeDirectory() as NSString).appendingPathComponent("Desktop")
+    }
+
+    func startIfEnabled() {
+        if enabled { start() }
+    }
+
+    func start() {
+        guard !isRunning else { return }
+        let path = watchPath
+
+        lastKnownFiles = Set(
+            (try? FileManager.default.contentsOfDirectory(atPath: path))?.filter { $0.hasPrefix("Screenshot") || $0.hasPrefix("Screen Shot") } ?? []
+        )
+
+        let cfPath = path as CFString
+        var context = FSEventStreamContext()
+
+        let callback: FSEventStreamCallback = { _, _, _, _, _, _ in
+            Task { @MainActor in
+                ScreenshotWatcher.instance.handleFSEvent()
+            }
+        }
+
+        stream = FSEventStreamCreate(
+            nil, callback, &context,
+            [cfPath] as CFArray,
+            FSEventStreamEventId(kFSEventStreamEventIdSinceNow),
+            0.1,
+            FSEventStreamCreateFlags(kFSEventStreamCreateFlagFileEvents | kFSEventStreamCreateFlagUseCFTypes)
+        )
+
+        if let stream {
+            FSEventStreamScheduleWithRunLoop(stream, CFRunLoopGetMain(), CFRunLoopMode.defaultMode.rawValue)
+            FSEventStreamStart(stream)
+            isRunning = true
+            SBLog.app.info("Screenshot watcher started on \(path)")
+        }
+    }
+
+    func stop() {
+        guard isRunning, let stream else { return }
+        FSEventStreamStop(stream)
+        FSEventStreamInvalidate(stream)
+        FSEventStreamRelease(stream)
+        self.stream = nil
+        isRunning = false
+        SBLog.app.info("Screenshot watcher stopped")
+    }
+
+    /// Called when a new screenshot is detected. Wired by AppDelegate to send a store action.
+    var onScreenshotDetected: ((String) -> Void)?
+
+    private func handleFSEvent() {
+        let dir = watchPath
+        guard let files = try? FileManager.default.contentsOfDirectory(atPath: dir) else { return }
+
+        let screenshots = files.filter {
+            ($0.hasPrefix("Screenshot") || $0.hasPrefix("Screen Shot")) &&
+            ($0.hasSuffix(".png") || $0.hasSuffix(".jpg") || $0.hasSuffix(".jpeg"))
+        }
+
+        let newFiles = Set(screenshots).subtracting(lastKnownFiles)
+        lastKnownFiles = Set(screenshots)
+
+        if let newest = newFiles.sorted().last {
+            let originalPath = (dir as NSString).appendingPathComponent(newest)
+            let ext = (newest as NSString).pathExtension
+            let tmpPath = "/tmp/Screenshot-\(Int(Date().timeIntervalSince1970)).\(ext)"
+
+            do {
+                try FileManager.default.copyItem(atPath: originalPath, toPath: tmpPath)
+            } catch {
+                SBLog.app.error("Screenshot copy failed: \(error.localizedDescription)")
+                return
+            }
+
+            SBLog.app.info("Screenshot path copied: \(tmpPath)")
+            onScreenshotDetected?(tmpPath)
+        }
+    }
+}
